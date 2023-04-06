@@ -58,3 +58,5 @@ https://elinux.org/ECE434_Project_-_Diabetic_Monitor
 ## Hackster.io page
 
 https://www.hackster.io/eddiemannan/dexcom-g6-diabetic-monitor-3f7af7
+
+minor change

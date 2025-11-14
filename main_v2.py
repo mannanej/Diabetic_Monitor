@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import os
-import csv
 import time
 import shlex
 import pickle
@@ -9,7 +7,7 @@ from pydexcom import Dexcom
 from subprocess import call
 from collections import deque
 from datetime import datetime
-# import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.GPIO as GPIO
 ####################################################################################################################################
 # File Name: main.py
 # Author: Eddie Mannan
@@ -79,18 +77,18 @@ def main():
     endTime = time.perf_counter()
     runTime = endTime - startTime
     # This section will display the info to the LCD screen
-    # subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentDate.strftime('%I:%M:%S %p')} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
+    subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentDate.strftime('%I:%M:%S %p')} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
     # This section will handle the LEDs
     sugarLevelLED(currentSugar)
     systemRunningLED(False)
     ########## General print statements for debugging ##########
-    print("Date: ", currentDate.strftime('%m-%d-%Y'))
-    print("Time: ", currentDate.strftime('%I:%M:%S %p'))
-    print("A1C: ", round(a1c, 1))
-    print("Current: ", currentSugar)
-    print("Highest: ", highest)
-    print("Lowest: ", lowest)
-    print("Runtime: ", round(runTime, 2), "seconds")
+    # print("Date: ", currentDate.strftime('%m-%d-%Y'))
+    # print("Time: ", currentDate.strftime('%I:%M:%S %p'))
+    # print("A1C: ", round(a1c, 1))
+    # print("Current: ", currentSugar)
+    # print("Highest: ", highest)
+    # print("Lowest: ", lowest)
+    # print("Runtime: ", round(runTime, 2), "seconds")
     return
 ####################################################################################################################################
 def saveDexcomInfo(username, password):
@@ -130,48 +128,47 @@ def getA1C(sugars):
     return a1c
 ####################################################################################################################################
 def sugarLevelLED(currentSugar):
-#     # Control the different LEDs based on current sugar level
-#     RED = "P9_11"
-#     GREEN = "P9_15"
-#     BLUE = "P9_21"
-#     GPIO.setup(RED, GPIO.OUT)
-#     GPIO.setup(GREEN, GPIO.OUT)
-#     GPIO.setup(BLUE, GPIO.OUT)
-#     # Sugar is HIGH
-#     if (currentSugar >= 180):
-#         GPIO.output(RED, GPIO.HIGH)
-#         GPIO.output(GREEN, GPIO.LOW)
-#         GPIO.output(BLUE, GPIO.LOW)
-#     # Sugar is NORMAL
-#     elif (currentSugar < 180 and currentSugar > 80):
-#         GPIO.output(RED, GPIO.LOW)
-#         GPIO.output(GREEN, GPIO.HIGH)
-#         GPIO.output(BLUE, GPIO.LOW)
-#     # Sugar is LOW
-#     elif (currentSugar <= 80):
-#         GPIO.output(RED, GPIO.LOW)
-#         GPIO.output(GREEN, GPIO.LOW)
-#         GPIO.output(BLUE, GPIO.HIGH)
-#     # Error
-#     else:
-#         GPIO.output(RED, GPIO.HIGH)
-#         GPIO.output(GREEN, GPIO.HIGH)
-#         GPIO.output(BLUE, GPIO.HIGH)
+    # Control the different LEDs based on current sugar level
+    RED = "P9_11"
+    GREEN = "P9_15"
+    BLUE = "P9_21"
+    GPIO.setup(RED, GPIO.OUT)
+    GPIO.setup(GREEN, GPIO.OUT)
+    GPIO.setup(BLUE, GPIO.OUT)
+    # Sugar is HIGH
+    if (currentSugar >= 180):
+        GPIO.output(RED, GPIO.HIGH)
+        GPIO.output(GREEN, GPIO.LOW)
+        GPIO.output(BLUE, GPIO.LOW)
+    # Sugar is NORMAL
+    elif (currentSugar < 180 and currentSugar > 80):
+        GPIO.output(RED, GPIO.LOW)
+        GPIO.output(GREEN, GPIO.HIGH)
+        GPIO.output(BLUE, GPIO.LOW)
+    # Sugar is LOW
+    elif (currentSugar <= 80):
+        GPIO.output(RED, GPIO.LOW)
+        GPIO.output(GREEN, GPIO.LOW)
+        GPIO.output(BLUE, GPIO.HIGH)
+    # Error
+    else:
+        GPIO.output(RED, GPIO.HIGH)
+        GPIO.output(GREEN, GPIO.HIGH)
+        GPIO.output(BLUE, GPIO.HIGH)
     return
 # ####################################################################################################################################
 def systemRunningLED(running):
-#     # Turn on/off the yellow LED when the system is calculating
-#     YELLOW = "P9_23"
-#     GPIO.setup(YELLOW, GPIO.OUT)
-#     if (running):
-#         GPIO.output(YELLOW, GPIO.HIGH)
-#     else:
-#         GPIO.output(YELLOW, GPIO.LOW)
+    # Turn on/off the yellow LED when the system is calculating
+    YELLOW = "P9_23"
+    GPIO.setup(YELLOW, GPIO.OUT)
+    if (running):
+        GPIO.output(YELLOW, GPIO.HIGH)
+    else:
+        GPIO.output(YELLOW, GPIO.LOW)
     return
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
 if __name__ == '__main__':
-    # newExcelPull = call("./getNewExcel.sh", shell=True)
     loadDexcomInfo()
     loadA1CInfo()
     main()

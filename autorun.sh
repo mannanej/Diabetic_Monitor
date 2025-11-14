@@ -8,4 +8,4 @@
 
 cd /home/debian/Diabetic_Monitor
 
-python3 main.py
+python3 main_v2.py

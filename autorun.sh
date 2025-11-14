@@ -6,8 +6,6 @@
 # Project: Diabetic Monitor
 # Description: Called by crontab, runs the main code
 
-#cd /home/debian/Diabetic_Monitor
-
-#python3 main_v2.py
+cd /home/debian/Diabetic_Monitor
 
 /usr/bin/python3 /home/debian/Diabetic_Monitor/main_v2.py

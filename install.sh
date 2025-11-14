@@ -7,8 +7,10 @@
 # Description: Sets the program to run every 5 minutes
 
 # Install modules/packages
+sudo /usr/bin/python3 -c "import pydexcom"
 apt install fbi
 apt install imagemagick
+
 
 # Add device tree to uEnv.txt
 line=$(grep "uboot_overlay_addr4" /boot/uEnv.txt)

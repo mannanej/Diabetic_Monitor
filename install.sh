@@ -23,7 +23,7 @@ chmod +x /home/debian/Diabetic_Monitor/autorun.sh
 
 # Configure autorun in crontab
 if ! grep -q "Diabetic_Monitor" /etc/crontab; then
-    echo "*/5 * * * * root /home/debian/Diabetic_Monitor/autorun.sh 2>&1 | logger" >> /etc/crontab
+    echo "*/5 * * * * root /home/debian/Diabetic_Monitor/autorun.sh 2>&1 | logger -t autorun" >> /etc/crontab
 fi
 
 echo "Reboot device to enable device overlay"

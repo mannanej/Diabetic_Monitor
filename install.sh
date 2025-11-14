@@ -18,8 +18,11 @@ sed -i "s|$line|uboot_overlay_addr4=/lib/firmware/BB-LCD-ADAFRUIT-24-SPI1-00A0.d
 git config pull.rebase false
 git config --global --add safe.directory /home/debian/Diabetic_Monitor
 
+# Make autorun.sh executable
+chmod +x /home/debian/Diabetic_Monitor/autorun.sh
+
 # Configure autorun in crontab
-if ! grep -q "DiabeticMonitor" /etc/crontab; then
+if ! grep -q "Diabetic_Monitor" /etc/crontab; then
     echo "*/5 * * * * root /home/debian/Diabetic_Monitor/autorun.sh 2>&1 | logger" >> /etc/crontab
 fi
 

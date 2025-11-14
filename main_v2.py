@@ -77,7 +77,7 @@ def main():
     endTime = time.perf_counter()
     runTime = endTime - startTime
     # This section will display the info to the LCD screen
-    subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentDate.strftime('%I:%M:%S %p')} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
+    subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentDate.strftime('%I:%M:%S')} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
     # This section will handle the LEDs
     sugarLevelLED(currentSugar)
     systemRunningLED(False)
